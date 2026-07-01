@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>you talk — Как не утонуть в тревоге</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f5f7fa;
+            color: #1A1A1A;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ---------- ХЕДЕР ---------- */
+        .header {
+            width: 100%;
+            max-width: 1440px;
+            height: 76px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            box-shadow: inset 0 -2px 0 #EFF2F2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 120px;
+            position: relative;
+        }
+
+        .logo {
+            flex-shrink: 0;
+            display: block;
+            line-height: 0;
+            width: 51px;
+            height: 36px;
+        }
+
+        .logo img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav li {
+            position: relative;
+        }
+
+        .nav a {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1A1A1A;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .nav a:hover {
+            color: #2963A3;
+        }
+
+        .nav .dropdown-arrow {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin-left: 2px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .nav .dropdown-arrow::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            width: 5px;
+            height: 5px;
+            border-right: 1.5px solid #333333;
+            border-bottom: 1.5px solid #333333;
+        }
+
+        /* Кнопка "Подобрать психолога" — как в блоге */
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 20px;
+            width: 230px;
+            height: 48px;
+            background: #E3F5F5;
+            border-radius: 4px;
+            border: none;
+            font-size: 16px;
+            font-weight: 700;
+            color: #03B2A5;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            flex-shrink: 0;
+            white-space: nowrap;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-primary:hover {
+            background: #c8ecec;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 10;
+        }
+
+        .burger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: #1A1A1A;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .burger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 76px;
+            left: 0;
+            right: 0;
+            background: #FFFFFF;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            padding: 20px 16px;
+            flex-direction: column;
+            gap: 16px;
+            border-top: 1px solid #EFF2F2;
+            z-index: 100;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            font-size: 18px;
+            font-weight: 500;
+            color: #1A1A1A;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .mobile-menu a:last-of-type {
+            border-bottom: none;
+        }
+
+        .mobile-menu .btn-primary {
+            width: 100%;
+            margin-top: 8px;
+            display: flex;
+        }
+
+        /* ---------- Хлебные крошки ---------- */
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #333333;
+            flex-wrap: wrap;
+            max-width: 1440px;
+            margin: 16px auto 0;
+            padding: 0 120px;
+            width: 100%;
+        }
+
+        .breadcrumbs a {
+            color: #333333;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .breadcrumbs a:hover {
+            opacity: 0.7;
+        }
+
+        .breadcrumbs .separator {
+            color: #C1C5CD;
+        }
+
+        .breadcrumbs .current {
+            color: #333333;
+        }
+
+        /* ---------- Основной контейнер ---------- */
+        .page-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 120px;
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+            flex: 1;
+        }
+
+        /* ---------- Левая колонка (статья) ---------- */
+        .article-main {
+            flex: 1;
+            max-width: 690px;
+        }
+
+        /* ---------- Правая колонка (aside) ---------- */
+        .article-sidebar {
+            width: 282px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* ---------- Карточка 1 ---------- */
+        .sidebar-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 16px 24px 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            border: 1px solid #DEDEDE;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            width: 282px;
+            position: relative;
+        }
+
+        .sidebar-card .card-image {
+            width: 100%;
+            max-width: 257px;
+            height: 206px;
+            border-radius: 12px;
+            overflow: hidden;
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        .sidebar-card .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .sidebar-card .card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            text-align: center;
+            width: 100%;
+            max-width: 234px;
+        }
+
+        .sidebar-card .card-content .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 24px;
+            color: #333333;
+            flex: 1;
+            width: 100%;
+        }
+
+        .sidebar-card .card-content .card-title .nowrap {
+            white-space: nowrap;
+        }
+
+        .sidebar-card .card-content p {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #333333;
+        }
+
+        .sidebar-card .card-content .btn-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 16px;
+            gap: 8px;
+            width: 100%;
+            height: 48px;
+            background: #35B3A9;
+            border-radius: 4px;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .sidebar-card .card-content .btn-card:hover {
+            background: #2a9e95;
+        }
+
+        /* ---------- Карточка 2: Психолог Лилия ---------- */
+        .sidebar-card-psychologist {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #DEDEDE;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            width: 282px;
+            position: relative;
+        }
+
+        .sidebar-card-psychologist .psychologist-badges {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .sidebar-card-psychologist .psychologist-badges .badge {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px 6px;
+            gap: 4px;
+            height: 24px;
+            background: rgba(243, 244, 248, 0.7);
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.25px;
+            color: #333333;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+
+        .sidebar-card-psychologist .psychologist-badges .badge:hover {
+            background: rgba(243, 244, 248, 1);
+        }
+
+        .sidebar-card-psychologist .psychologist-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            margin-top: 32px;
+        }
+
+        .sidebar-card-psychologist .psychologist-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .sidebar-card-psychologist .psychologist-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 28px;
+            text-align: center;
+            color: #333333;
+        }
+
+        .sidebar-card-psychologist .psychologist-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 24px;
+            text-align: center;
+            color: #333333;
+            align-self: stretch;
+        }
+
+        .sidebar-card-psychologist .psychologist-experience {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+            color: #333333;
+            align-self: stretch;
+        }
+
+        .sidebar-card-psychologist .psychologist-specialization {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+            align-self: stretch;
+        }
+
+        .sidebar-card-psychologist .psychologist-specialization .spec-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            color: #333333;
+        }
+
+        .sidebar-card-psychologist .psychologist-specialization .spec-item {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #333333;
+        }
+
+        .sidebar-card-psychologist .btn-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 16px;
+            gap: 8px;
+            width: 100%;
+            height: 48px;
+            background: #35B3A9;
+            border-radius: 4px;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .sidebar-card-psychologist .btn-card:hover {
+            background: #2a9e95;
+        }
+
+        /* ---------- Заголовок статьи ---------- */
+        .article-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 56px;
+            color: #333333;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #494949;
+        }
+
+        .article-meta .dot {
+            color: #494949;
+        }
+
+        .article-image {
+            margin-top: 24px;
+            border-radius: 16px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .article-text {
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .article-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            color: #333333;
+        }
+
+        .article-text p {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 28px;
+            color: #333333;
+        }
+
+        .article-text .highlight-block {
+            background: #F3F7FE;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .article-text .highlight-block p {
+            font-size: 18px;
+            line-height: 28px;
+            color: #333333;
+        }
+
+        .article-text .highlight-block .author-name {
+            font-weight: 700;
+            color: #333333;
+            margin-top: 8px;
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px;
+            margin-top: 32px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #333333;
+        }
+
+        .article-tags .tag {
+            color: #333333;
+        }
+
+        .article-tags .separator {
+            color: #C1C5CD;
+        }
+
+        .problem-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            margin-top: 60px;
+            padding: 40px 0;
+            border-top: 1px solid #DEDEDE;
+        }
+
+        .problem-content {
+            max-width: 348px;
+        }
+
+        .problem-content .problem-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 56px;
+            color: #333333;
+        }
+
+        .problem-content .problem-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 26px;
+            color: #333333;
+            margin-top: 32px;
+        }
+
+        .problem-content .btn-problem {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 24px;
+            gap: 10px;
+            width: 238px;
+            height: 60px;
+            background: #16C8BB;
+            border-radius: 4px;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 32px;
+        }
+
+        .problem-content .btn-problem:hover {
+            background: #13b0a5;
+        }
+
+        .problem-content .btn-problem:active {
+            transform: scale(0.97);
+        }
+
+        .problem-image {
+            flex-shrink: 0;
+            width: 520px;
+            height: 330px;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .problem-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* ---------- ФУТЕР ---------- */
+        .footer {
+            width: 100%;
+            background: #2963A3;
+            padding: 40px 120px 24px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-menu {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 40px;
+            align-content: start;
+        }
+
+        .footer-menu a {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+
+        .footer-menu a:hover {
+            opacity: 0.7;
+        }
+
+        .footer-subscribe {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-subscribe-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 26px;
+            color: #FFFFFF;
+            max-width: 356px;
+        }
+
+        .footer-subscribe-form {
+            display: flex;
+            align-items: center;
+            max-width: 384px;
+        }
+
+        .footer-subscribe-form input {
+            flex: 1;
+            padding: 14px 16px;
+            height: 48px;
+            background: #FFFFFF;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #1A1A1A;
+            outline: none;
+            min-width: 0;
+        }
+
+        .footer-subscribe-form input::placeholder {
+            color: #9D9D9D;
+        }
+
+        .footer-subscribe-form button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 48px;
+            background: #16C8BB;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .footer-subscribe-form button:hover {
+            background: #13b0a5;
+        }
+
+        .footer-subscribe-form button svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: #FFFFFF;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .footer-subscribe-agreement {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.25px;
+            color: #FFFFFF;
+            opacity: 0.7;
+            max-width: 486px;
+        }
+
+        .footer-social {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: flex-end;
+            justify-content: flex-start;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+
+        .footer-social-icons a:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .footer-social-icons svg {
+            width: 20px;
+            height: 20px;
+            fill: #FFFFFF;
+        }
+
+        .footer-bottom {
+            max-width: 1440px;
+            margin: 32px auto 0;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-bottom a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .footer-bottom a:hover {
+            opacity: 0.8;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        /* ---------- Адаптив ---------- */
+        @media (max-width: 1024px) {
+            .header {
+                padding: 0 40px;
+            }
+            .nav {
+                display: none;
+            }
+            .btn-primary {
+                display: none;
+            }
+            .burger {
+                display: flex;
+            }
+            .mobile-menu .btn-primary {
+                display: flex;
+            }
+            .breadcrumbs {
+                padding: 0 40px;
+            }
+            .page-wrapper {
+                padding: 0 40px;
+                flex-direction: column;
+            }
+            .article-main {
+                max-width: 100%;
+            }
+            .article-sidebar {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .problem-block {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .problem-image {
+                width: 100%;
+                height: auto;
+                max-height: 330px;
+            }
+            .footer {
+                padding: 40px 40px 24px;
+            }
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+            .footer-social {
+                align-items: flex-start;
+                grid-column: 2;
+                grid-row: 1;
+            }
+            .footer-subscribe {
+                grid-column: 1;
+                grid-row: 2;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                align-items: center;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .header {
+                height: 64px;
+                padding: 0 16px;
+            }
+            .logo {
+                width: 42px;
+                height: 30px;
+            }
+            .burger span {
+                width: 24px;
+                height: 2.5px;
+            }
+            .mobile-menu {
+                top: 64px;
+            }
+            .mobile-menu a {
+                font-size: 16px;
+                padding: 8px 0;
+            }
+            .breadcrumbs {
+                padding: 0 16px;
+                font-size: 12px;
+            }
+            .page-wrapper {
+                padding: 0 16px;
+                flex-direction: column;
+            }
+            .article-title {
+                font-size: 28px;
+                line-height: 36px;
+            }
+            .article-sidebar {
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+            }
+            .sidebar-card {
+                width: 100%;
+                max-width: 282px;
+            }
+            .sidebar-card-psychologist {
+                width: 100%;
+                max-width: 282px;
+            }
+            .problem-content .problem-title {
+                font-size: 32px;
+                line-height: 40px;
+            }
+            .problem-content .btn-problem {
+                width: 100%;
+            }
+            .problem-image {
+                width: 100%;
+                height: auto;
+                max-height: 250px;
+            }
+            .footer {
+                padding: 32px 16px 20px;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .footer-menu {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px 20px;
+            }
+            .footer-menu a {
+                font-size: 14px;
+            }
+            .footer-subscribe-title {
+                font-size: 16px;
+                line-height: 22px;
+            }
+            .footer-subscribe-form {
+                max-width: 100%;
+            }
+            .footer-subscribe-form input {
+                border-radius: 4px 0 0 4px;
+            }
+            .footer-subscribe-form button {
+                border-radius: 0 4px 4px 0;
+            }
+            .footer-subscribe-agreement {
+                font-size: 11px;
+                line-height: 16px;
+            }
+            .footer-social {
+                align-items: flex-start;
+                grid-column: 1;
+                grid-row: auto;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                align-items: center;
+                text-align: center;
+                font-size: 12px;
+            }
+            .footer-bottom-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== ХЕДЕР ====== -->
+    <header class="header">
+
+        <a href="#" class="logo">
+            <img src="лого.jpg" alt="you talk" width="236" height="190" />
+        </a>
+
+        <ul class="nav">
+            <li><a href="#">О нас</a></li>
+            <li><a href="#">Тарифы</a></li>
+            <li><a href="#">Для бизнеса</a></li>
+            <li><a href="#">Психологам</a></li>
+            <li><a href="#">Сертификат</a></li>
+            <li>
+                <a href="#">
+                    Материалы
+                    <span class="dropdown-arrow"></span>
+                </a>
+            </li>
+            <li><a href="#">FAQ</a></li>
+        </ul>
+
+        <!-- Кнопка "Подобрать психолога" — как в блоге -->
+        <button class="btn-primary">Подобрать психолога</button>
+
+        <button class="burger" id="burgerBtn" aria-label="Открыть меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#">О нас</a>
+            <a href="#">Тарифы</a>
+            <a href="#">Для бизнеса</a>
+            <a href="#">Психологам</a>
+            <a href="#">Сертификат</a>
+            <a href="#">Материалы ▼</a>
+            <a href="#">FAQ</a>
+            <button class="btn-primary">Подобрать психолога</button>
+        </div>
+
+    </header>
+
+    <!-- ====== ХЛЕБНЫЕ КРОШКИ ====== -->
+    <div class="breadcrumbs">
+        <a href="index.html">Главная</a>
+        <span class="separator">></span>
+        <a href="index.html">Блог</a>
+        <span class="separator">></span>
+        <span class="current">Как не утонуть в тревоге и управлять своими страхами</span>
+    </div>
+
+    <!-- ====== ОСНОВНОЙ КОНТЕНТ ====== -->
+    <div class="page-wrapper">
+
+        <!-- Левая колонка — статья -->
+        <main class="article-main">
+
+            <h1 class="article-title">Как не утонуть в тревоге и управлять своими страхами</h1>
+
+            <div class="article-meta">
+                <span>Автор: Лиза Файнтух</span>
+                <span class="dot">·</span>
+                <span>21.08.2021</span>
+            </div>
+
+            <div class="article-image">
+                <img src="4карточка.png" alt="Как не утонуть в тревоге" />
+            </div>
+
+            <div class="article-text">
+
+                <h2>Содержание</h2>
+
+                <p>Как понять, что отношения с мамой были дисфункциональными и привели к травме?</p>
+                <p>Мама привет!</p>
+                <p>Под под заголовок под заголовком</p>
+                <p>Под под под заголовок под заголовком</p>
+                <p>Под под под под заголовок под заголовком</p>
+                <p>Ну вот опять заголовок который как «привет мама»</p>
+                <p>Как понять, что вы страдаете от материнской травмы?</p>
+
+                <h2>Заголовок h3</h2>
+
+                <p>Один из самых важных навыков, которые может дать работа с психотерапевтом — умение в разных ситуациях по-разному обходиться со своими эмоциями. Снять этот процесс с автопилота и перевести его в поле сознания.</p>
+
+                <p>Давайте, к примеру, разберем тревогу. Можно разложить перед собой целую коллекцию доступных реакций и выбрать нужную:</p>
+
+                <p>Мы знаем, что нуждаться в помощи и поддержке в трудные периоды жизни абсолютно нормально для любого человека, и стремимся сделать психотерапию безопасной, удобной и доступной каждому</p>
+
+                <div class="highlight-block">
+                    <p>Что еще можно делать с тревогой?</p>
+                    <p>Управлять ей через что-то внешнее: включать музыку, которая создает другое настроение, сесть за работу с цифрами, которая быстренько активизирует другие участки мозга, читать блоги, которые вас успокаивают и отвлекают.</p>
+                    <p>А еще порой можно разрешить себе тревогу заесть чем-то вкусным. Это, конечно, не самая здоровая стратегия, но в ряде ситуаций можно считать ее вполне рабочей. Особенно, когда внутренний ресурс на нуле, а поддерживающее окружение не в доступе.</p>
+                    <p class="author-name">Ана Крымская</p>
+                </div>
+
+            </div>
+
+            <div class="article-tags">
+                <span class="tag">Self</span>
+                <span class="separator">·</span>
+                <span class="tag">Самооценка и самопринятие</span>
+                <span class="separator">·</span>
+                <span class="tag">Самооценка и самопринятие</span>
+                <span class="separator">·</span>
+                <span class="tag">Упражнения</span>
+                <span class="separator">·</span>
+                <span class="tag">Чувства и эмоции</span>
+                <span class="separator">·</span>
+                <span class="tag">Самооценка и самопринятие</span>
+                <span class="separator">·</span>
+                <span class="tag">Тревога</span>
+            </div>
+
+            <div class="problem-block">
+
+                <div class="problem-content">
+                    <div class="problem-title">Откликается проблема?</div>
+                    <div class="problem-text">Поможем подобрать специалиста по работе с подобным запросом</div>
+                    <button class="btn-problem">Подобрать психолога</button>
+                </div>
+
+                <div class="problem-image">
+                    <img src="9карточка.png" alt="Поможем подобрать специалиста" />
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- Правая колонка — aside с карточками -->
+        <aside class="article-sidebar">
+
+            <!-- Карточка 1: Загружаем свободные окошки -->
+            <div class="sidebar-card">
+                <div class="card-image">
+                    <img src="10карточка.png" alt="Загружаем свободные окошки" />
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        Загружаем <span class="nowrap">свободные окошки</span>
+                    </div>
+                    <p>Все в порядке, сейчас мы перенаправим вас в сервис записи Qlick, через который удобно выбрать дату, время встречи и оплатить её</p>
+                    <button class="btn-card">Подробнее</button>
+                </div>
+            </div>
+
+            <!-- Карточка 2: Психолог Лилия -->
+            <div class="sidebar-card-psychologist">
+
+                <div class="psychologist-badges">
+                    <a href="#" class="badge">✏️ Переписка</a>
+                    <a href="#" class="badge">📹 Видео</a>
+                </div>
+
+                <div class="psychologist-photo">
+                    <img src="11Карточка.png" alt="Лилия" />
+                </div>
+                <div class="psychologist-name">Лилия</div>
+                <div class="psychologist-title">Психолог</div>
+                <div class="psychologist-experience">Опыт 6 лет · 43 года</div>
+                <div class="psychologist-specialization">
+                    <div class="spec-title">С чем работает психолог</div>
+                    <div class="spec-item">Тревога, тревожности</div>
+                    <div class="spec-item">Подавленность</div>
+                    <div class="spec-item">Тревога и панические атаки</div>
+                </div>
+                <button class="btn-card">Подробнее</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- ====== ФУТЕР ====== -->
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-menu">
+                <a href="#">О нас</a>
+                <a href="#">Тарифы</a>
+                <a href="#">Для бизнеса</a>
+                <a href="#">Психологам</a>
+                <a href="#">FAQ</a>
+                <a href="#">Блог</a>
+                <a href="#">Вебинары</a>
+                <a href="#">Подкаст</a>
+                <a href="#">Сертификат</a>
+                <a href="#">Контакты</a>
+            </div>
+
+            <div class="footer-subscribe">
+                <div class="footer-subscribe-title">
+                    Одно письмо в неделю со свежими новостями и акциями
+                </div>
+                <div class="footer-subscribe-form">
+                    <input type="email" placeholder="Ваш e-mail" />
+                    <button type="submit" aria-label="Подписаться">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3L21 12L3 21L7 12L3 3Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+                            <path d="M7 12L13 12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="footer-subscribe-agreement">
+                    Подписываясь, я соглашаюсь на обработку персональных данных в соответствии с ФЗ РФ № 152-ФЗ «О персональных данных», а также с Политикой конфиденциальности
+                </div>
+            </div>
+
+            <div class="footer-social">
+                <div class="footer-social-icons">
+                    <a href="#" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="ВКонтакте">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.742 16.166h-1.506c-.596 0-.978-.324-1.208-.706-.707-1.074-1.68-1.98-2.694-2.616-.162-.104-.386-.14-.52-.06-.198.12-.278.36-.278.64v1.826c0 .248-.066.654-.47.654h-1.308c-.418 0-.806-.238-.806-.934 0-.282.046-.568.138-.84.35-1.058.824-2.058 1.302-3.018.452-.912.854-1.784 1.216-2.608.142-.324.278-.646.408-.972.06-.148.108-.312.108-.476 0-.366-.248-.612-.56-.612h-1.46c-.232 0-.44.118-.544.312-.566 1.06-1.168 2.036-1.764 2.998-.242.39-.47.788-.684 1.192-.164.31-.332.616-.498.922-.04.074-.08.148-.12.222-.178.332-.434.596-.818.596-.166 0-.336-.04-.502-.088-1.028-.262-1.894-1.044-2.406-1.936-.218-.378-.484-.726-.726-1.094-.18-.272-.366-.538-.544-.81-.18-.274-.368-.54-.544-.814-.184-.29-.468-.478-.79-.512H3.762c-.398 0-.55.262-.55.558 0 .16.042.314.09.466.33.994.872 1.822 1.44 2.612.858 1.194 1.804 2.206 2.89 3.092 1.334 1.086 2.884 1.682 4.522 1.682.534 0 .976-.186 1.098-.644.034-.126.052-.258.052-.39 0-.242-.08-.418-.23-.558-.27-.254-.784-.412-1.14-.508-.39-.106-.8-.162-1.166-.284-.244-.082-.342-.206-.33-.47.012-.25.1-.498.194-.74.136-.354.328-.68.512-1.006.13-.232.262-.462.394-.69.062-.106.12-.216.18-.324.14-.242.318-.418.608-.418.244 0 .482.076.72.172.864.348 1.588 1.008 2.156 1.752.25.33.458.7.682 1.056.196.312.44.574.77.574h1.56c.426 0 .672-.272.672-.644 0-.246-.136-.544-.314-.75-.412-.482-.91-.854-1.38-1.246-.406-.34-.824-.66-1.18-1.036-.34-.356-.628-.77-.642-1.276-.016-.528.264-.984.626-1.302.154-.136.338-.23.534-.29.342-.102.702-.114 1.056-.114.356 0 .71.016 1.064.028.354.012.706.028 1.058.042.4.016.796.036 1.19.066.232.018.494.064.718.148.11.042.218.104.274.198.12.204.054.452-.028.638-.2.454-.57.846-.958 1.172-.246.208-.516.388-.78.576-.256.182-.512.36-.722.59-.146.158-.18.356-.066.536.14.22.306.424.468.63.36.456.748.874 1.1 1.334.328.428.552.94.552 1.498.002.418-.29.726-.806.726z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Telegram">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>Youtalk, 2018-2022</span>
+            <div class="footer-bottom-links">
+                <a href="#">Юридические документы</a>
+                <a href="#">Политика конфиденциальности</a>
+            </div>
+        </div>
+
+    </footer>
+
+    <script>
+        // ====== Логика бургер-меню ======
+        const burgerBtn = document.getElementById('burgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        burgerBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerBtn.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            const isClickInside = e.target.closest('.header');
+            if (!isClickInside) {
+                burgerBtn.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            }
+        });
+    </script>
+
+</body>
+</html>
